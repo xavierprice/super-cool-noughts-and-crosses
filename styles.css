@@ -64,9 +64,28 @@ body {
 }
 
 .cell.x::before {
- transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .cell.x::after {
- transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.circle::before {
+  width: var(--marker-size);
+  height: var(--marker-size);
+  background-color: black;
+}
+
+.cell.circle::after {
+  width: calc(var(--marker-size) * 0.7);
+  height: calc(var(--marker-size) * 0.7);
+  background-color: white;
 }
