@@ -12,7 +12,7 @@ const WINNING_COMBINATION = [
 ];
 
 const cellElements = document.querySelectorAll("[data-cell]");
-const board = document.getElementById("board");
+const boardElements = document.querySelectorAll(".board");
 const winningMessageElement = document.getElementById("winningMessage");
 const restartButton = document.getElementById("restartButton");
 const winningMessageTextElement = document.querySelector(
@@ -29,7 +29,7 @@ function startGame() {
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
-    cell.removeEventListener('click', handleClick)
+    cell.removeEventListener("click", handleClick);
     cell.addEventListener("click", handleClick, { once: true });
   });
   setBoardHoverClass();
@@ -76,13 +76,15 @@ function switchTurns() {
 }
 
 function setBoardHoverClass() {
-  board.classList.remove(X_CLASS);
-  board.classList.remove(CIRCLE_CLASS);
-  if (circleTurn) {
-    board.classList.add(CIRCLE_CLASS);
-  } else {
-    board.classList.add(X_CLASS);
-  }
+  boardElements.forEach((board) => {
+    board.classList.remove(X_CLASS);
+    board.classList.remove(CIRCLE_CLASS);
+    if (circleTurn) {
+      board.classList.add(CIRCLE_CLASS);
+    } else {
+      board.classList.add(X_CLASS);
+    }
+  });
 }
 
 function checkWin(currentClass) {
