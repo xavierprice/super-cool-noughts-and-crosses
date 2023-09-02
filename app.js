@@ -20,6 +20,18 @@ const winningMessageTextElement = document.querySelector(
 );
 let circleTurn;
 
+cellElements.forEach((cell, index) => {
+  cell.addEventListener("click", () => {
+    console.log(`Cell index: ${index}`);
+  });
+});
+
+boardElements.forEach((board, index) => {
+  board.addEventListener("click", () => {
+    console.log(`Large Cell index: ${index}`);
+  });
+});
+
 startGame();
 
 restartButton.addEventListener("click", startGame);
@@ -30,6 +42,7 @@ function startGame() {
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
     cell.removeEventListener("click", handleClick);
+
     cell.addEventListener("click", handleClick, { once: true });
   });
   setBoardHoverClass();
