@@ -7,6 +7,8 @@
 :root {
   --cell-size: 50px;
   --marker-size: calc(var(--cell-size) * 0.9);
+  --large-cell-size: 200px;
+  --large-marker-size: calc(var(--large-cell-size) * 0.9);
 }
 
 body {
@@ -32,6 +34,7 @@ body {
   align-content: center;
   justify-items: center;
   align-items: center;
+  position: relative;
   grid-template-columns: repeat(3, auto);
   border: 2px solid black;
 }
@@ -45,10 +48,13 @@ body {
   align-items: center;
   position: relative;
   cursor: pointer;
+  display: none;
 }
 
 .cell.x,
-.cell.circle {
+.cell.circle,
+.large-cell.large-x,
+.large-cell.large-circle {
   cursor: not-allowed;
 }
 
@@ -82,7 +88,10 @@ body {
 
 .cell.x::before,
 .cell.x::after,
-.cell.circle::before {
+.large-cell.large-x::before,
+.large-cell.large-x::after,
+.cell.circle::before,
+.large-cell.large-circle::before {
   background-color: black;
 }
 
@@ -90,7 +99,6 @@ body {
 .board .cell:not(.x):not(.circle):hover::after {
   background-color: lightgrey;
 }
-
 
 .cell.x::before,
 .cell.x::after,
@@ -166,4 +174,39 @@ body {
 
 .winning-message.show {
   display: flex;
+}
+
+.large-cell.large-x::before,
+.large-cell.large-x::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--large-marker-size) * 0.15);
+  height: var(--large-marker-size);
+  background-color: black;
+}
+
+.large-cell.large-x::before {
+  transform: rotate(45deg);
+}
+
+.large-cell.large-x::after {
+  transform: rotate(-45deg);
+}
+
+.large-cell.large-circle::before,
+.large-cell.large-circle::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.large-cell.large-circle::before {
+  width: var(--large-marker-size);
+  height: var(--large-marker-size);
+}
+
+.large-cell.large-circle::after {
+  width: calc(var(--large-marker-size) * 0.7);
+  height: calc(var(--large-marker-size) * 0.7);
+  background-color: white;
 }
