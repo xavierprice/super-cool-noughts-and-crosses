@@ -1,6 +1,6 @@
 const X_CLASS = "x";
 const CIRCLE_CLASS = "circle";
-const WINNING_COMBINATION = [
+const LARGE_CELL_WINNING_COMBINATION = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -10,6 +10,27 @@ const WINNING_COMBINATION = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+
+const WINNING_COMBINATION = [];
+
+for (let i = 0; i < 81; i += 9) {
+  //horizontal & vertical
+  for (let j = 0; j < 3; j++) {
+    const horizontal = [i + j * 3, i + j * 3 + 1, i + j * 3 + 2];
+    const vertical = [i + j, i + j + 3, i + j + 6];
+
+    WINNING_COMBINATION.push(horizontal);
+    WINNING_COMBINATION.push(vertical);
+  }
+  //diagonal
+  for (let k = 0; k < 1; k++) {
+    const diagonal1 = [i, i + 4, i + 8];
+    const diagonal2 = [i + 2, i + 4, i + 6];
+
+    WINNING_COMBINATION.push(diagonal1);
+    WINNING_COMBINATION.push(diagonal2);
+  }
+}
 
 const cellElements = document.querySelectorAll("[data-cell]");
 const boardElements = document.querySelectorAll(".board");
