@@ -1,5 +1,7 @@
 const X_CLASS = "x";
 const CIRCLE_CLASS = "circle";
+const LARGE_X_CLASS = "large-x";
+const LARGE_CIRCLE_CLASS = "large-circle";
 const LARGE_CELL_WINNING_COMBINATION = [
   [0, 1, 2],
   [3, 4, 5],
@@ -84,13 +86,16 @@ function handleClick(e) {
   }
 }
 
-function endGame(draw) {
-  if (draw) {
-    winningMessageTextElement.innerText = "Draw!";
-  } else {
-    winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`;
-  }
-  winningMessageElement.classList.add("show");
+function placeMark(cell, currentClass) {
+  cell.classList.add(currentClass);
+}
+
+function checkWin(currentClass) {
+  return WINNING_COMBINATION.some((combination) => {
+    return combination.every((index) => {
+      return cellElements[index].classList.contains(currentClass);
+    });
+  });
 }
 
 function isDraw() {
@@ -101,8 +106,13 @@ function isDraw() {
   });
 }
 
-function placeMark(cell, currentClass) {
-  cell.classList.add(currentClass);
+function endGame(draw) {
+  if (draw) {
+    winningMessageTextElement.innerText = "Draw!";
+  } else {
+    winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`;
+  }
+  winningMessageElement.classList.add("show");
 }
 
 function switchTurns() {
@@ -118,13 +128,5 @@ function setBoardHoverClass() {
     } else {
       board.classList.add(X_CLASS);
     }
-  });
-}
-
-function checkWin(currentClass) {
-  return WINNING_COMBINATION.some((combination) => {
-    return combination.every((index) => {
-      return cellElements[index].classList.contains(currentClass);
-    });
   });
 }

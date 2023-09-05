@@ -48,7 +48,6 @@ body {
   align-items: center;
   position: relative;
   cursor: pointer;
-  display: none;
 }
 
 .cell.x,
