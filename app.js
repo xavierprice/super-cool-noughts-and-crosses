@@ -98,7 +98,7 @@ function endMinigame(draw) {
       }
     });
   }
-  startGame();
+  continueGame();
 }
 
 function switchTurns() {
@@ -128,6 +128,16 @@ function startGame() {
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
+    cell.removeEventListener("click", handleClick);
+    cell.addEventListener("click", handleClick, { once: true });
+  });
+  setBoardHoverClass();
+  winningMessageElement.classList.remove("show");
+}
+
+function continueGame() {
+  switchTurns();
+  cellElements.forEach((cell) => {
     cell.removeEventListener("click", handleClick);
     cell.addEventListener("click", handleClick, { once: true });
   });
