@@ -77,28 +77,13 @@ function isDraw() {
   });
 }
 
-function endMinigame(draw) {
+function endGame(draw) {
   if (draw) {
     winningMessageTextElement.innerText = "Draw!";
   } else {
-    const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-    const currentLargeClass = circleTurn ? LARGE_CIRCLE_CLASS : LARGE_X_CLASS;
-    WINNING_COMBINATION.forEach((combination) => {
-      if (
-        combination.every((index) =>
-          cellElements[index].classList.contains(currentClass)
-        )
-      ) {
-        const boardIndex = Math.floor(combination[0] / 9); // Calculate the board (large cell) index
-        const winningBoard = boardElements[boardIndex];
-        winningBoard.querySelectorAll("[data-cell]").forEach((cell) => {
-          cell.classList.remove("cell");
-        });
-        winningBoard.classList.add(currentLargeClass);
-      }
-    });
+    winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`;
   }
-  startGame();
+  winningMessageElement.classList.add("show");
 }
 
 function switchTurns() {
@@ -129,6 +114,7 @@ function startGame() {
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
     cell.removeEventListener("click", handleClick);
+
     cell.addEventListener("click", handleClick, { once: true });
   });
   setBoardHoverClass();
@@ -140,9 +126,9 @@ function handleClick(e) {
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   placeMark(cell, currentClass);
   if (checkWin(currentClass)) {
-    endMinigame(false);
+    endGame(false);
   } else if (isDraw()) {
-    endMinigame(true);
+    endGame(true);
   } else {
     switchTurns();
     setBoardHoverClass();
