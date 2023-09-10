@@ -45,13 +45,18 @@ let circleTurn;
 
 cellElements.forEach((cell, index) => {
   cell.addEventListener("click", () => {
-    console.log(`Cell index: ${index}`);
+    const dataIndex = cell.parentElement.getAttribute("data-board-index");
+    const cellIndex = cell.getAttribute("data-cell-index");
+
+    console.log(`Cell Index: ${index}, 
+    Data Cell index: ${cellIndex}, 
+    Data Board Index: ${dataIndex}`);
   });
 });
 
 boardElements.forEach((board, index) => {
   board.addEventListener("click", () => {
-    console.log(`Large Cell index: ${index}`);
+    //console.log(`Large Cell index: ${index}`);
   });
 });
 
@@ -149,6 +154,14 @@ function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   placeMark(cell, currentClass);
+//when clicked, play in only that board
+  const cellIndex = cell.getAttribute("data-cell-index");
+  document
+    .querySelectorAll(`[data-board-index="${cellIndex}"]`)
+    .forEach((cellWithSameIndex) => {
+      cellWithSameIndex.classList.add("new");
+    });
+
   if (checkWin(currentClass)) {
     endMinigame(false);
   } else if (isDraw()) {
