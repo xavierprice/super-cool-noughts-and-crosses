@@ -157,11 +157,20 @@ function handleClick(e) {
   placeMark(cell, currentClass);
   //when clicked, play in only that board
   const cellIndex = cell.getAttribute("data-cell-index");
+  const boardIndex = cell.parentElement.getAttribute("data-board-index");
+  boardElements.forEach((board) => {
+    board.classList.remove("allow-click");
+    board.classList.remove("disable-click");
+  });
   document
-    .querySelectorAll(`[data-board-index="${cellIndex}"]`)
-    .forEach((cellWithSameIndex) => {
-      cellWithSameIndex.classList.add("new");
-    });
+    .querySelector(`[data-board-index="${cellIndex}"]`)
+    .classList.add("allow-click");
+
+  boardElements.forEach((board) => {
+    if (board.getAttribute("data-board-index") !== cellIndex) {
+      board.classList.add("disable-click");
+    }
+  });
 
   if (checkWin(currentClass)) {
     endMinigame(false);
