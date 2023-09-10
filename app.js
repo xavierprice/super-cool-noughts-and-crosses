@@ -130,6 +130,9 @@ restartButton.addEventListener("click", startGame);
 
 function startGame() {
   circleTurn = false;
+  boardElements.forEach((board) => {
+    board.classList.add("allow-click");
+  });
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
@@ -154,13 +157,23 @@ function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   placeMark(cell, currentClass);
-//when clicked, play in only that board
+  //when clicked, play in only that board
+
   const cellIndex = cell.getAttribute("data-cell-index");
+  const boardIndex = cell.parentElement.getAttribute("data-board-index");
+  boardElements.forEach((board) => {
+    board.classList.remove("allow-click");
+    board.classList.remove("disable-click");
+  });
   document
-    .querySelectorAll(`[data-board-index="${cellIndex}"]`)
-    .forEach((cellWithSameIndex) => {
-      cellWithSameIndex.classList.add("new");
-    });
+    .querySelector(`[data-board-index="${cellIndex}"]`)
+    .classList.add("allow-click");
+
+  boardElements.forEach((board) => {
+    if (board.getAttribute("data-board-index") !== cellIndex) {
+      board.classList.add("disable-click");
+    }
+  });
 
   if (checkWin(currentClass)) {
     endMinigame(false);

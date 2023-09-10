@@ -39,6 +39,17 @@ body {
   border: 2px solid black;
 }
 
+/* Disable pointer events for all cells with the 'disable-click' class */
+.board.disable-click {
+  pointer-events: none;
+  background-color: lightgrey;
+}
+
+/* Add this class to the board that should allow interaction */
+.board.allow-click {
+  pointer-events: auto;
+}
+
 .cell {
   width: var(--cell-size);
   height: var(--cell-size);
@@ -139,6 +150,23 @@ body {
   width: calc(var(--marker-size) * 0.7);
   height: calc(var(--marker-size) * 0.7);
   background-color: white;
+}
+
+.board.disable-click .cell.circle::before,
+.cell.circle.disable-click::before,
+.board.disable-click .board.circle .cell:not(.x):not(.circle):hover::before,
+.cell.circle.disable-click .cell:not(.x):not(.circle):hover::before {
+  width: var(--marker-size);
+  height: var(--marker-size);
+}
+
+.board.disable-click .cell.circle::after,
+.cell.circle.disable-click::after,
+.board.disable-click .board.circle .cell:not(.x):not(.circle):hover::after,
+.cell.circle.disable-click .cell:not(.x):not(.circle):hover::after {
+  width: calc(var(--marker-size) * 0.7);
+  height: calc(var(--marker-size) * 0.7);
+  background-color: lightgrey;
 }
 
 .winning-message {
