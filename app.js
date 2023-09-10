@@ -44,12 +44,14 @@ const winningMessageTextElement = document.querySelector(
 let circleTurn;
 
 cellElements.forEach((cell, index) => {
-  const dataIndex = cell.parentElement.getAttribute("data-board-index");
-  const cellIndex = cell.getAttribute("data-cell-index");
+  cell.addEventListener("click", () => {
+    const dataIndex = cell.parentElement.getAttribute("data-board-index");
+    const cellIndex = cell.getAttribute("data-cell-index");
 
-  console.log(`Cell Index: ${index}, 
+    console.log(`Cell Index: ${index}, 
     Data Cell index: ${cellIndex}, 
     Data Board Index: ${dataIndex}`);
+  });
 });
 
 boardElements.forEach((board, index) => {
@@ -155,22 +157,36 @@ function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   placeMark(cell, currentClass);
-  //when clicked, play in only that board
-  const cellIndex = cell.getAttribute("data-cell-index");
-  const boardIndex = cell.parentElement.getAttribute("data-board-index");
-  boardElements.forEach((board) => {
-    board.classList.remove("allow-click");
-    board.classList.remove("disable-click");
-  });
-  document
-    .querySelector(`[data-board-index="${cellIndex}"]`)
-    .classList.add("allow-click");
 
+  const cellIndex = cell.getAttribute("data-cell-index");
   boardElements.forEach((board) => {
-    if (board.getAttribute("data-board-index") !== cellIndex) {
+    board.classList.remove("allow-click", "disable-click");
+  });
+
+  // Enable the clicked board and disable others
+  const clickedBoard = document.querySelector(
+    `[data-board-index="${cellIndex}"]`
+  );
+  clickedBoard.classList.add("allow-click");
+  boardElements.forEach((board) => {
+    if (board !== clickedBoard) {
       board.classList.add("disable-click");
     }
   });
+
+  //what to do to large class
+  if (
+    clickedBoard.classList.contains(LARGE_CIRCLE_CLASS) ||
+    clickedBoard.classList.contains(LARGE_X_CLASS)
+  ) {
+    //enable all other boards to be clicked
+    boardElements.forEach((board) => {
+      if (board !== clickedBoard) {
+        board.classList.remove("disable-click");
+        board.classList.add("allow-click");
+      }
+    });
+  }
 
   if (checkWin(currentClass)) {
     endMinigame(false);

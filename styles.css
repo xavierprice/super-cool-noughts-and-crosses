@@ -39,13 +39,11 @@ body {
   border: 2px solid black;
 }
 
-/* Disable pointer events for all cells with the 'disable-click' class */
 .board.disable-click {
   pointer-events: none;
   background-color: lightgrey;
 }
 
-/* Add this class to the board that should allow interaction */
 .board.allow-click {
   pointer-events: auto;
 }
