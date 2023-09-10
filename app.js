@@ -45,18 +45,13 @@ let circleTurn;
 
 cellElements.forEach((cell, index) => {
   cell.addEventListener("click", () => {
-    const dataIndex = cell.parentElement.getAttribute("data-board-index");
-    const cellIndex = cell.getAttribute("data-cell-index");
-
-    console.log(`Cell Index: ${index}, 
-    Data Cell index: ${cellIndex}, 
-    Data Board Index: ${dataIndex}`);
+    console.log(`Cell index: ${index}`);
   });
 });
 
 boardElements.forEach((board, index) => {
   board.addEventListener("click", () => {
-    //console.log(`Large Cell index: ${index}`);
+    console.log(`Large Cell index: ${index}`);
   });
 });
 
@@ -157,9 +152,7 @@ function handleClick(e) {
   const cell = e.target;
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   placeMark(cell, currentClass);
-<<<<<<< HEAD
-  //when clicked, play in only that board
-
+//when clicked, play in only that board
   const cellIndex = cell.getAttribute("data-cell-index");
   const boardIndex = cell.parentElement.getAttribute("data-board-index");
   boardElements.forEach((board) => {
@@ -175,15 +168,6 @@ function handleClick(e) {
       board.classList.add("disable-click");
     }
   });
-=======
-//when clicked, play in only that board
-  const cellIndex = cell.getAttribute("data-cell-index");
-  document
-    .querySelectorAll(`[data-board-index="${cellIndex}"]`)
-    .forEach((cellWithSameIndex) => {
-      cellWithSameIndex.classList.add("new");
-    });
->>>>>>> a1bd6a1... start board index === cell index feature
 
   if (checkWin(currentClass)) {
     endMinigame(false);
