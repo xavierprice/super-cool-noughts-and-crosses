@@ -66,7 +66,7 @@ function placeMark(cell, currentClass) {
   cell.classList.add(currentClass);
 }
 
-function checkWin(currentClass) {
+function checkMinigameWin(currentClass) {
   return WINNING_COMBINATION.some((combination) => {
     return combination.every((index) => {
       return cellElements[index].classList.contains(currentClass);
@@ -159,41 +159,59 @@ function handleClick(e) {
   placeMark(cell, currentClass);
 
   const cellIndex = cell.getAttribute("data-cell-index");
+  const nextBoard = document.querySelector(`[data-board-index="${cellIndex}"]`);
+  const clickedBoard = cell.closest(".board");
+
   boardElements.forEach((board) => {
     board.classList.remove("allow-click", "disable-click");
   });
 
-  // Enable the clicked board and disable others
-  const clickedBoard = document.querySelector(
-    `[data-board-index="${cellIndex}"]`
-  );
-  clickedBoard.classList.add("allow-click");
+  nextBoard.classList.add("allow-click");
   boardElements.forEach((board) => {
-    if (board !== clickedBoard) {
+    if (board !== nextBoard) {
       board.classList.add("disable-click");
     }
   });
 
-  //what to do to large class
   if (
-    clickedBoard.classList.contains(LARGE_CIRCLE_CLASS) ||
-    clickedBoard.classList.contains(LARGE_X_CLASS)
+    nextBoard.classList.contains(LARGE_CIRCLE_CLASS) ||
+    nextBoard.classList.contains(LARGE_X_CLASS)
   ) {
-    //enable all other boards to be clicked
     boardElements.forEach((board) => {
-      if (board !== clickedBoard) {
+      if (board !== nextBoard) {
         board.classList.remove("disable-click");
         board.classList.add("allow-click");
       }
     });
   }
 
-  if (checkWin(currentClass)) {
+  if (checkMinigameWin(currentClass)) {
     endMinigame(false);
-  } else if (isDraw()) {
-    endMinigame(true);
+  } else if (isMinigameDraw(clickedBoard)) {
+    clearBoardClasses(clickedBoard);
   } else {
     switchTurns();
     setBoardHoverClass();
   }
+}
+
+function isMinigameDraw(board) {
+  const cellsInBoard = board.querySelectorAll(".cell");
+  for (const cell of cellsInBoard) {
+    if (
+      !cell.classList.contains(CIRCLE_CLASS) &&
+      !cell.classList.contains(X_CLASS)
+    ) {
+      return false; // There is an empty cell in the board
+    }
+  }
+  return true; // All cells in the board are filled
+}
+
+function clearBoardClasses(board) {
+  const cellsInBoard = board.querySelectorAll(".cell");
+  cellsInBoard.forEach((cell) => {
+    cell.classList.remove(CIRCLE_CLASS, X_CLASS);
+  });
+  continueGame();
 }
