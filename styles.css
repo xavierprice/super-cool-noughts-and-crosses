@@ -7,6 +7,8 @@
 :root {
   --cell-size: 50px;
   --marker-size: calc(var(--cell-size) * 0.9);
+  --large-cell-size: 200px;
+  --large-marker-size: calc(var(--large-cell-size) * 0.9);
 }
 
 body {
@@ -17,10 +19,7 @@ body {
   width: 100vw;
   height: 100vh;
   display: grid;
-  justify-content: center;
-  align-content: center;
-  justify-items: center;
-  align-items: center;
+  place-content: center;
   grid-template-columns: repeat(3, auto);
 }
 
@@ -32,8 +31,18 @@ body {
   align-content: center;
   justify-items: center;
   align-items: center;
+  position: relative;
   grid-template-columns: repeat(3, auto);
   border: 2px solid black;
+}
+
+.board.disable-click {
+  pointer-events: none;
+  background-color: lightgrey;
+}
+
+.board.allow-click {
+  pointer-events: auto;
 }
 
 .cell {
@@ -48,8 +57,11 @@ body {
 }
 
 .cell.x,
-.cell.circle {
+.cell.circle,
+.large-cell.large-x,
+.large-cell.large-circle {
   cursor: not-allowed;
+  pointer-events: none;
 }
 
 .cell:first-child,
@@ -82,7 +94,10 @@ body {
 
 .cell.x::before,
 .cell.x::after,
-.cell.circle::before {
+.large-cell.large-x::before,
+.large-cell.large-x::after,
+.cell.circle::before,
+.large-cell.large-circle::before {
   background-color: black;
 }
 
@@ -90,7 +105,6 @@ body {
 .board .cell:not(.x):not(.circle):hover::after {
   background-color: lightgrey;
 }
-
 
 .cell.x::before,
 .cell.x::after,
@@ -102,24 +116,39 @@ body {
   height: var(--marker-size);
 }
 
+.large-cell.large-x::before,
+.large-cell.large-x::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--large-marker-size) * 0.15);
+  height: var(--large-marker-size);
+  background-color: black;
+}
+
 .cell.x::before,
+.large-cell.large-x::before,
 .board.x .cell:not(.x):not(.circle):hover::before {
   transform: rotate(45deg);
 }
 
 .cell.x::after,
+.large-cell.large-x::after,
 .board.x .cell:not(.x):not(.circle):hover::after {
   transform: rotate(-45deg);
 }
 
 .cell.circle::before,
 .cell.circle::after,
+.large-cell.large-circle::before,
+.large-cell.large-circle::after,
 .board.circle .cell:not(.x):not(.circle):hover::before,
 .board.circle .cell:not(.x):not(.circle):hover::after {
   content: "";
   position: absolute;
   border-radius: 50%;
 }
+
+/* small circle css */
 
 .cell.circle::before,
 .board.circle .cell:not(.x):not(.circle):hover::before {
@@ -132,6 +161,49 @@ body {
   width: calc(var(--marker-size) * 0.7);
   height: calc(var(--marker-size) * 0.7);
   background-color: white;
+}
+
+.board.disable-click .cell.circle::before,
+.cell.circle.disable-click::before,
+.board.disable-click .board.circle .cell:not(.x):not(.circle):hover::before,
+.cell.circle.disable-click .cell:not(.x):not(.circle):hover::before {
+  width: var(--marker-size);
+  height: var(--marker-size);
+}
+
+.board.disable-click .cell.circle::after,
+.cell.circle.disable-click::after,
+.board.disable-click .board.circle .cell:not(.x):not(.circle):hover::after,
+.cell.circle.disable-click .cell:not(.x):not(.circle):hover::after {
+  width: calc(var(--marker-size) * 0.7);
+  height: calc(var(--marker-size) * 0.7);
+  background-color: lightgrey;
+}
+
+/* large circle css */
+
+.large-cell.large-circle::before {
+  width: var(--large-marker-size);
+  height: var(--large-marker-size);
+}
+
+.large-cell.large-circle::after {
+  width: calc(var(--large-marker-size) * 0.7);
+  height: calc(var(--large-marker-size) * 0.7);
+  background-color: white;
+}
+
+.board.disable-click .large-cell.large-circle::before,
+.large-cell.large-circle.disable-click::before {
+  width: var(--large-marker-size);
+  height: var(--large-marker-size);
+}
+
+.board.disable-click .large-cell.large-circle::after,
+.large-cell.large-circle.disable-click::after {
+  width: calc(var(--large-marker-size) * 0.7);
+  height: calc(var(--large-marker-size) * 0.7);
+  background-color: lightgrey;
 }
 
 .winning-message {
