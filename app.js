@@ -122,10 +122,66 @@ function setBoardHoverClass() {
   });
 }
 
-function checkWin(currentClass) {
-  return WINNING_COMBINATION.some((combination) => {
-    return combination.every((index) => {
-      return cellElements[index].classList.contains(currentClass);
+//end of function declarations
+
+startGame();
+
+restartButton.addEventListener("click", startGame);
+
+function startGame() {
+  circleTurn = false;
+  boardElements.forEach((board) => {
+    board.classList.add("allow-click");
+  });
+  cellElements.forEach((cell) => {
+    cell.classList.remove(X_CLASS);
+    cell.classList.remove(CIRCLE_CLASS);
+    cell.removeEventListener("click", handleClick);
+    cell.addEventListener("click", handleClick, { once: true });
+  });
+  setBoardHoverClass();
+  winningMessageElement.classList.remove("show");
+}
+
+function continueGame() {
+  switchTurns();
+  cellElements.forEach((cell) => {
+    cell.removeEventListener("click", handleClick);
+    cell.addEventListener("click", handleClick, { once: true });
+  });
+  setBoardHoverClass();
+  winningMessageElement.classList.remove("show");
+}
+
+function handleClick(e) {
+  const cell = e.target;
+  const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+  placeMark(cell, currentClass);
+
+  const cellIndex = cell.getAttribute("data-cell-index");
+  const nextBoard = document.querySelector(`[data-board-index="${cellIndex}"]`);
+  const clickedBoard = cell.closest(".board");
+
+  boardElements.forEach((board) => {
+    board.classList.remove("allow-click", "disable-click");
+  });
+
+  boardElements.forEach((board) => {
+    if (board !== nextBoard) {
+      board.classList.add("disable-click");
+      nextBoard.classList.add("allow-click");
+    }
+  });
+
+  if (
+    nextBoard.classList.contains(LARGE_CIRCLE_CLASS) ||
+    nextBoard.classList.contains(LARGE_X_CLASS)
+  ) {
+    boardElements.forEach((board) => {
+      if (board !== nextBoard) {
+        board.classList.remove("disable-click");
+        board.classList.add("allow-click");
+      }
     });
   }
 
