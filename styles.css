@@ -88,7 +88,8 @@ body {
 .cell:nth-child(7),
 .board:last-child,
 .board:nth-child(8),
-.board:nth-child(7) {
+.board:nth-child(7),
+.board:nth-child(9) {
   border-bottom: none;
 }
 
@@ -238,4 +239,20 @@ body {
 
 .winning-message.show {
   display: flex;
+}
+
+.button-container button {
+  font-size: 1.5rem;
+  background-color: white;
+  border: 1px solid black;
+  padding: 0.25em 0.5em;
+  margin-top: 1rem;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.button-container button:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
 }

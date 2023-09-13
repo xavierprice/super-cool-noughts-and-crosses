@@ -7,6 +7,7 @@ const cellElements = document.querySelectorAll("[data-cell]");
 const boardElements = document.querySelectorAll(".board");
 const winningMessageElement = document.getElementById("winningMessage");
 const restartButton = document.getElementById("restartButton");
+const restartGame = document.getElementById("restartGame");
 const winningMessageTextElement = document.querySelector(
   "[data-winning-message-text]"
 );
@@ -158,6 +159,7 @@ function endMinigame() {
 startGame();
 
 restartButton.addEventListener("click", startGame);
+restartGame.addEventListener("click", startGame);
 
 function startGame() {
   circleTurn = false;
