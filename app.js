@@ -44,23 +44,6 @@ const winningMessageTextElement = document.querySelector(
 );
 let circleTurn;
 
-/*cellElements.forEach((cell, index) => {
-  cell.addEventListener("click", () => {
-    const dataIndex = cell.parentElement.getAttribute("data-board-index");
-    const cellIndex = cell.getAttribute("data-cell-index");
-
-    console.log(`Cell Index: ${index}, 
-    Data Cell index: ${cellIndex}, 
-    Data Board Index: ${dataIndex}`);
-  });
-});
-
-boardElements.forEach((board, index) => {
-  board.addEventListener("click", () => {
-    //console.log(`Large Cell index: ${index}`);
-  });
-});*/
-
 //function declarations
 
 function placeMark(cell, currentClass) {
@@ -128,31 +111,6 @@ function setBoardHoverClass() {
   });
 }
 
-/*function checkWin(currentLargeClass) {
-  for (let i = 0; i < LARGE_CELL_WINNING_COMBINATION.length; i++) {
-    const combination = LARGE_CELL_WINNING_COMBINATION[i];
-    let hasX = true;
-    let hasCircle = true;
-
-    for (let j = 0; j < combination.length; j++) {
-      const cellIndex = combination[j];
-
-      if (!dataBoard[cellIndex].classList.contains(LARGE_X_CLASS)) {
-        hasX = false;
-      }
-
-      if (!dataBoard[cellIndex].classList.contains(LARGE_CIRCLE_CLASS)) {
-        hasCircle = false;
-      }
-    }
-
-    if (hasX || hasCircle) {
-      return currentLargeClass;
-    }
-  }
-  return false;
-}*/
-
 function checkWin(currentLargeClass) {
   return LARGE_CELL_WINNING_COMBINATION.some((combination) => {
     return combination.every((index) => {
@@ -188,7 +146,6 @@ function startGame() {
   cellElements.forEach((cell) => {
     cell.classList.remove(X_CLASS);
     cell.classList.remove(CIRCLE_CLASS);
-    //cell.classList.remove("cell");
     cell.classList.add("cell");
     cell.removeEventListener("click", handleClick);
     cell.addEventListener("click", handleClick, { once: true });
@@ -244,11 +201,6 @@ function handleClick(e) {
     endMinigame(false);
   } else if (isMinigameDraw(clickedBoard)) {
     clearBoardClasses(clickedBoard);
-  } else if (checkWin(currentLargeClass)) {
-    console.log("win detected");
-    endGame(false);
-  } else if (isDraw()) {
-    endGame(true);
   } else {
     switchTurns();
     setBoardHoverClass();
@@ -262,10 +214,10 @@ function isMinigameDraw(board) {
       !cell.classList.contains(CIRCLE_CLASS) &&
       !cell.classList.contains(X_CLASS)
     ) {
-      return false; // There is an empty cell in the board
+      return false;
     }
   }
-  return true; // All cells in the board are filled
+  return true;
 }
 
 function clearBoardClasses(board) {
