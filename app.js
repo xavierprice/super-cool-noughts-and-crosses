@@ -71,7 +71,6 @@ function continueGame() {
     cell.addEventListener("click", handleClick, { once: true });
   });
   setBoardHoverClass();
-  winningMessageElement.classList.remove("show");
 }
 
 function isDraw() {
@@ -130,28 +129,23 @@ function endGame(draw) {
   winningMessageElement.classList.add("show");
 }
 
-function endMinigame(draw) {
+function endMinigame() {
+  const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
   const currentLargeClass = circleTurn ? LARGE_CIRCLE_CLASS : LARGE_X_CLASS;
-  if (draw) {
-    winningMessageTextElement.innerText = "Draw!";
-  } else {
-    const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-    const currentLargeClass = circleTurn ? LARGE_CIRCLE_CLASS : LARGE_X_CLASS;
-    WINNING_COMBINATION.forEach((combination) => {
-      if (
-        combination.every((index) =>
-          cellElements[index].classList.contains(currentClass)
-        )
-      ) {
-        const boardIndex = Math.floor(combination[0] / 9); // Calculate the board (large cell) index
-        const winningBoard = boardElements[boardIndex];
-        winningBoard.querySelectorAll("[data-cell]").forEach((cell) => {
-          cell.classList.remove("cell");
-        });
-        winningBoard.classList.add(currentLargeClass);
-      }
-    });
-  }
+  WINNING_COMBINATION.forEach((combination) => {
+    if (
+      combination.every((index) =>
+        cellElements[index].classList.contains(currentClass)
+      )
+    ) {
+      const boardIndex = Math.floor(combination[0] / 9);
+      const winningBoard = boardElements[boardIndex];
+      winningBoard.querySelectorAll("[data-cell]").forEach((cell) => {
+        cell.classList.remove("cell");
+      });
+      winningBoard.classList.add(currentLargeClass);
+    }
+  });
   if (checkWin(currentLargeClass)) {
     endGame(false);
   } else {
@@ -169,6 +163,7 @@ function startGame() {
   circleTurn = false;
   boardElements.forEach((board) => {
     board.classList.add("allow-click");
+    board.classList.remove("disable-click");
     board.classList.remove(LARGE_X_CLASS);
     board.classList.remove(LARGE_CIRCLE_CLASS);
   });
@@ -218,6 +213,17 @@ function handleClick(e) {
 
   if (checkMinigameWin(currentClass)) {
     endMinigame(false);
+    if (
+      nextBoard.classList.contains(LARGE_CIRCLE_CLASS) ||
+      nextBoard.classList.contains(LARGE_X_CLASS)
+    ) {
+      boardElements.forEach((board) => {
+        if (board !== nextBoard) {
+          board.classList.remove("disable-click");
+          board.classList.add("allow-click");
+        }
+      });
+    }
   } else if (isMinigameDraw(clickedBoard)) {
     clearBoardClasses(clickedBoard);
   } else {
