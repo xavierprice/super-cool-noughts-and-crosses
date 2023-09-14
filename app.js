@@ -7,8 +7,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const cellElements = document.querySelectorAll("[data-cell]");
   const boardElements = document.querySelectorAll(".board");
   const winningMessageElement = document.getElementById("winningMessage");
+  const welcomeMessageElement = document.getElementById("message-container");
   const restartButton = document.getElementById("restartButton");
   const restartGame = document.getElementById("restartGame");
+  const playButton = document.getElementById("playButton");
   const winningMessageTextElement = document.querySelector(
     "[data-winning-message-text]"
   );
@@ -160,6 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   restartButton.addEventListener("click", startGame);
   restartGame.addEventListener("click", startGame);
+  playButton.addEventListener("click", startGame);
 
   function startGame() {
     circleTurn = false;
@@ -178,6 +181,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     setBoardHoverClass();
     winningMessageElement.classList.remove("show");
+    welcomeMessageElement.classList.add("hide");
   }
 
   function handleClick(e) {
@@ -235,5 +239,4 @@ document.addEventListener("DOMContentLoaded", function () {
       setBoardHoverClass();
     }
   }
-  startGame();
 });
