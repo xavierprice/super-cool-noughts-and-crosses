@@ -14,6 +14,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const winningMessageTextElement = document.querySelector(
     "[data-winning-message-text]"
   );
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menu = document.querySelector(".menu");
+  const closeButton = document.querySelector(".close-button");
+  const menuToggleElement = document.querySelector(".menu-toggle");
   let circleTurn;
   const LARGE_CELL_WINNING_COMBINATION = [
     [0, 1, 2],
@@ -158,6 +162,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  menuToggle.addEventListener("click", function () {
+    menu.classList.toggle("open");
+    menuToggleElement.classList.toggle("active");
+  });
+
+  closeButton.addEventListener("click", function () {
+    menu.classList.remove("open");
+    menuToggleElement.classList.remove("active");
+  });
+
   //end of function declarations
 
   restartButton.addEventListener("click", startGame);
@@ -166,6 +180,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startGame() {
     circleTurn = false;
+    menu.classList.remove("open");
+    menuToggleElement.classList.remove("active");
     boardElements.forEach((board) => {
       board.classList.add("allow-click");
       board.classList.remove("disable-click");
