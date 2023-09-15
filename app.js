@@ -186,6 +186,8 @@ document.addEventListener("DOMContentLoaded", function () {
   restartGame.addEventListener("click", startGame);
   playButton.addEventListener("click", startGame);
 
+  menuToggle.classList.add("active");
+
   function startGame() {
     circleTurn = false;
     menu.classList.remove("open");
