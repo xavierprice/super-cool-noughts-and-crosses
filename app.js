@@ -163,21 +163,37 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  const howToPlayButton = document.querySelectorAll(".how-to-play-button");
+  const howToplaySection = document.getElementById("howToPlaySection");
+
+  howToPlayButton.forEach(function (button) {
+    button.addEventListener("click", toggleHowToPlay);
+  });
+
+  function toggleHowToPlay() {
+    howToplaySection.classList.remove("hidden");
+    welcomeMessageElement.classList.add("hide");
+    menu.classList.add("open");
+  }
+
   menuToggle.addEventListener("click", function () {
     menu.classList.toggle("open");
     menuToggleElement.classList.toggle("active");
     overlay.classList.remove("hidden");
+    howToplaySection.classList.add("hidden");
   });
 
   closeButton.addEventListener("click", function () {
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
+    howToplaySection.classList.add("hidden");
   });
 
   overlay.addEventListener("click", function () {
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
     overlay.classList.add("hidden");
+    howToplaySection.classList.add("hidden");
   });
 
   //end of function declarations
@@ -187,11 +203,13 @@ document.addEventListener("DOMContentLoaded", function () {
   playButton.addEventListener("click", startGame);
 
   menuToggle.classList.add("active");
+  howToplaySection.classList.add("hidden");
 
   function startGame() {
     circleTurn = false;
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
+    howToplaySection.classList.add("hidden");
     boardElements.forEach((board) => {
       board.classList.add("allow-click");
       board.classList.remove("disable-click");
