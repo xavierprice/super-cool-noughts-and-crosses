@@ -395,3 +395,7 @@ body {
   display: block;
   pointer-events: auto;
 }
+
+.overlay.hidden {
+  display: none;
+}

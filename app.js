@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const menu = document.querySelector(".menu");
   const closeButton = document.querySelector(".close-button");
   const menuToggleElement = document.querySelector(".menu-toggle");
+  const overlay = document.querySelector(".overlay");
   let circleTurn;
   const LARGE_CELL_WINNING_COMBINATION = [
     [0, 1, 2],
@@ -165,11 +166,18 @@ document.addEventListener("DOMContentLoaded", function () {
   menuToggle.addEventListener("click", function () {
     menu.classList.toggle("open");
     menuToggleElement.classList.toggle("active");
+    overlay.classList.remove("hidden");
   });
 
   closeButton.addEventListener("click", function () {
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
+  });
+
+  overlay.addEventListener("click", function () {
+    menu.classList.remove("open");
+    menuToggleElement.classList.remove("active");
+    overlay.classList.add("hidden");
   });
 
   //end of function declarations
