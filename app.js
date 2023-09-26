@@ -181,7 +181,6 @@ document.addEventListener("DOMContentLoaded", function () {
     menuToggleElement.classList.remove("active");
     howToplaySection.classList.remove("show");
     overlay.classList.remove("visible");
-    continueGame();
   });
 
   //end of function declarations
