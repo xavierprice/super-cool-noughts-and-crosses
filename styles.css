@@ -378,7 +378,6 @@ body {
   width: 180px;
 }
 
-/* CSS for the overlay */
 .overlay {
   position: fixed;
   top: 0;
@@ -388,19 +387,15 @@ body {
   background-color: rgba(0, 0, 0, 0.9);
   z-index: 997;
   display: none;
-  pointer-events: none;
 }
 
-.menu.open + .overlay {
+.overlay.visible {
   display: block;
   pointer-events: auto;
 }
 
-.overlay.hidden {
-  display: none;
-}
-
-.how-to-play {
+.how-to-play.show {
+  display: block;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -414,9 +409,14 @@ body {
   padding: 20px;
   max-width: 80%; /* Set a maximum width if needed */
   text-align: center;
-  z-index: 1000; /* Adjust the z-index as needed */
+  z-index: 998; /* Adjust the z-index as needed */
 }
 
-.how-to-play.hidden {
+.how-to-play.show .close-button {
+  display: block;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.how-to-play {
   display: none;
 }

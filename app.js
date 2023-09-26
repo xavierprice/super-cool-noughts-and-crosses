@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   const menuToggle = document.querySelector(".menu-toggle");
   const menu = document.querySelector(".menu");
-  const closeButton = document.querySelector(".close-button");
+  const closeButton = document.querySelectorAll(".close-button");
   const menuToggleElement = document.querySelector(".menu-toggle");
   const overlay = document.querySelector(".overlay");
   let circleTurn;
@@ -170,30 +170,36 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", toggleHowToPlay);
   });
 
+  closeButton.forEach(function (button) {
+    button.addEventListener("click", closeFunction);
+  });
+
   function toggleHowToPlay() {
-    howToplaySection.classList.remove("hidden");
+    howToplaySection.classList.add("show");
     welcomeMessageElement.classList.add("hide");
-    menu.classList.add("open");
+    menu.classList.remove("open");
+    overlay.classList.add("visible");
   }
 
   menuToggle.addEventListener("click", function () {
     menu.classList.toggle("open");
     menuToggleElement.classList.toggle("active");
-    overlay.classList.remove("hidden");
-    howToplaySection.classList.add("hidden");
+    howToplaySection.classList.remove("show");
+    overlay.classList.add("visible");
   });
 
-  closeButton.addEventListener("click", function () {
+  function closeFunction() {
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
-    howToplaySection.classList.add("hidden");
-  });
+    howToplaySection.classList.remove("show");
+    overlay.classList.remove("visible");
+  }
 
   overlay.addEventListener("click", function () {
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
-    overlay.classList.add("hidden");
-    howToplaySection.classList.add("hidden");
+    howToplaySection.classList.remove("show");
+    overlay.classList.remove("visible");
   });
 
   //end of function declarations
@@ -203,13 +209,14 @@ document.addEventListener("DOMContentLoaded", function () {
   playButton.addEventListener("click", startGame);
 
   menuToggle.classList.add("active");
-  howToplaySection.classList.add("hidden");
+  howToplaySection.classList.remove("show");
 
   function startGame() {
     circleTurn = false;
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
-    howToplaySection.classList.add("hidden");
+    howToplaySection.classList.remove("show");
+    overlay.classList.remove("visible");
     boardElements.forEach((board) => {
       board.classList.add("allow-click");
       board.classList.remove("disable-click");
