@@ -91,27 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  function isMinigameDraw(board) {
-    const cellsInBoard = board.querySelectorAll(".cell");
-    for (const cell of cellsInBoard) {
-      if (
-        !cell.classList.contains(CIRCLE_CLASS) &&
-        !cell.classList.contains(X_CLASS)
-      ) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  function clearBoardClasses(board) {
-    const cellsInBoard = board.querySelectorAll(".cell");
-    cellsInBoard.forEach((cell) => {
-      cell.classList.remove(CIRCLE_CLASS, X_CLASS);
-    });
-    continueGame();
-  }
-
   function checkMinigameWin(currentClass) {
     return WINNING_COMBINATION.some((combination) => {
       return combination.every((index) => {
@@ -248,6 +227,33 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     const clickedBoard = cell.closest(".board");
 
+    function isMinigameDraw(clickedBoard) {
+      const cellsInBoard = clickedBoard.querySelectorAll(".cell");
+      for (const cell of cellsInBoard) {
+        if (
+          !cell.classList.contains(CIRCLE_CLASS) &&
+          !cell.classList.contains(X_CLASS)
+        ) {
+          console.log("Cell has no valid class:", clickedBoard);
+          return false;
+        }
+      }
+      console.log("All cells have valid classes.");
+      return true;
+    }
+
+    function clearBoardClasses(clickedBoard) {
+      const cellsInBoard = clickedBoard.querySelectorAll(".cell");
+      cellsInBoard.forEach((cell) => {
+        cell.classList.remove(CIRCLE_CLASS, X_CLASS);
+      });
+      continueGame();
+    }
+
+    if (isMinigameDraw(clickedBoard)) {
+      clearBoardClasses(clickedBoard);
+    }
+
     boardElements.forEach((board) => {
       board.classList.remove("allow-click", "disable-click");
     });
@@ -272,7 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (checkMinigameWin(currentClass)) {
-      endMinigame(false);
+      endMinigame();
       if (
         nextBoard.classList.contains(LARGE_CIRCLE_CLASS) ||
         nextBoard.classList.contains(LARGE_X_CLASS)
@@ -284,8 +290,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       }
-    } else if (isMinigameDraw(clickedBoard)) {
-      clearBoardClasses(clickedBoard);
     } else {
       switchTurns();
       setBoardHoverClass();
