@@ -83,10 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function isDraw() {
-    return [...cellElements].every((cell) => {
+    return [...boardElements].every((board) => {
       return (
-        cell.classList.contains(X_CLASS) ||
-        cell.classList.contains(CIRCLE_CLASS)
+        board.classList.contains(LARGE_X_CLASS) ||
+        board.classList.contains(LARGE_CIRCLE_CLASS)
       );
     });
   }
@@ -137,6 +137,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     if (checkWin(currentLargeClass)) {
       endGame(false);
+    } else if (isDraw()) {
+      endGame(true);
     } else {
       continueGame();
     }
