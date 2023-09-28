@@ -82,6 +82,14 @@ document.addEventListener("DOMContentLoaded", function () {
     setBoardHoverClass();
   }
 
+  function continueGameNoSwitch() {
+    cellElements.forEach((cell) => {
+      cell.removeEventListener("click", handleClick);
+      cell.addEventListener("click", handleClick, { once: true });
+    });
+    setBoardHoverClass();
+  }
+
   function isDraw() {
     return [...boardElements].every((board) => {
       return (
@@ -159,7 +167,8 @@ document.addEventListener("DOMContentLoaded", function () {
     howToplaySection.classList.add("show");
     welcomeMessageElement.classList.add("hide");
     menu.classList.remove("open");
-    overlay.classList.add("visible");
+    overlay.classList.toggle("visible");
+    continueGameNoSwitch();
   }
 
   menuToggle.addEventListener("click", function () {
