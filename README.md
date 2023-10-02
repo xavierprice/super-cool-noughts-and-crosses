@@ -1,4 +1,4 @@
-# XL-tic-tac-toe
-tic-tac-toe BUT BIGGER
+# Naughts & Crosses Connect
 
-inspired by small, mind-numbing games of regular tic-tac-toe
+Inspired by the classic game of tic-tac-toe I bring to you a bigger and more complex game of naughts and crosses.
+
