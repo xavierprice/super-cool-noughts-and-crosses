@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     howToplaySection.classList.add("show");
     welcomeMessageElement.classList.add("hide");
     menu.classList.remove("open");
-    overlay.classList.toggle("visible");
+    overlay.classList.add("visible");
     continueGameNoSwitch();
   }
 
