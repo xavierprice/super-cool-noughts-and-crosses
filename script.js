@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const welcomeMessageElement = document.getElementById("message-container");
   const restartButton = document.getElementById("restartButton");
   const restartGame = document.getElementById("restartGame");
+  const restartMediaQuery = document.getElementById("restart-media-query");
   const playButton = document.getElementById("playButton");
   const winningMessageTextElement = document.querySelector(
     "[data-winning-message-text]"
@@ -75,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function continueGame() {
     switchTurns();
+    updateViewTurnBox();
     cellElements.forEach((cell) => {
       cell.removeEventListener("click", handleClick);
       cell.addEventListener("click", handleClick, { once: true });
@@ -192,10 +194,18 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.classList.remove("visible");
   });
 
+  const viewTurnBox = document.querySelector(".view-turn-box");
+
+  function updateViewTurnBox() {
+    viewTurnBox.innerText = circleTurn ? "Noughts Turn" : "Crosses Turn";
+  }
+
   //end of function declarations
 
   restartButton.addEventListener("click", startGame);
   restartGame.addEventListener("click", startGame);
+  restartMediaQuery.addEventListener("click", startGame);
+
   playButton.addEventListener("click", startGame);
 
   menuToggle.classList.add("active");
@@ -203,6 +213,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function startGame() {
     circleTurn = false;
+    updateViewTurnBox();
     menu.classList.remove("open");
     menuToggleElement.classList.remove("active");
     howToplaySection.classList.remove("show");
@@ -301,6 +312,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       switchTurns();
       setBoardHoverClass();
+      updateViewTurnBox();
     }
   }
 });

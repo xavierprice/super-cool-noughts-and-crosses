@@ -313,6 +313,14 @@ body {
   border-color: white;
 }
 
+#restart-media-query {
+  display: none;
+}
+
+.view-turn-box {
+  display: none;
+}
+
 .menu-toggle {
   justify-content: space-around;
   cursor: pointer;
@@ -514,23 +522,61 @@ body {
   }
 
   .menu-toggle {
-    padding: 10px; /* Adjust padding for smaller screens */
+    display: none;
   }
 
-  .bar {
-    width: 3vw;
-    height: 0.5vh;
-    margin: 0.5vw 0;
-  }
-  
   .how-to-play {
     width: 100vw;
     display: block;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     text-align: center;
-    font-size: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    font-size: 1.3rem;
+  }
+
+  .welcome-message .how-to-play-button {
+    display: none;
+  }
+
+  .view-turn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  #restart-media-query {
+    display: block;
+    font-size: 1.25rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0.25em 0.5em;
+    cursor: pointer;
+    border-radius: 20px;
+  }
+
+  #restart-media-query button:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+
+  .view-turn-box {
+    display: block;
+    font-size: 1.25rem;
+    width: 70%;
+    height: 20%;
+    background-color: #f0f0f0;
+    border: 2px solid #333;
+    text-align: center;
+    border-radius: 20px;
+    padding: 0.25em 0.5em;
+    border: 1px solid black;
   }
 }
