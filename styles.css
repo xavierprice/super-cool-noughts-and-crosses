@@ -469,14 +469,22 @@ body {
     background-color: black;
   }
 
+  .board.x .cell:not(.x):not(.circle):hover::before,
+  .board.x .cell:not(.x):not(.circle):hover::after {
+    width: calc(15%);
+    height: calc(90%);
+  }
+
   /* small circle styles */
 
-  .cell.circle::before {
+  .cell.circle::before,
+  .board.circle .cell:not(.x):not(.circle):hover::before {
     width: calc(90%);
     height: calc(90%);
   }
 
-  .cell.circle::after {
+  .cell.circle::after,
+  .board.circle .cell:not(.x):not(.circle):hover::after {
     width: calc(63%);
     height: calc(63%);
     background-color: white;
