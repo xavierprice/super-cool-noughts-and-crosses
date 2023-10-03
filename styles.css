@@ -511,4 +511,14 @@ body {
     height: calc(63%);
     background-color: lightgrey;
   }
+
+  .menu-toggle {
+    padding: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .bar {
+    width: 3vw;
+    height: 0.5vh;
+    margin: 0.5vw 0;
+  }
 }
