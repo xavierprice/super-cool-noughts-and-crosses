@@ -244,11 +244,9 @@ document.addEventListener("DOMContentLoaded", function () {
           !cell.classList.contains(CIRCLE_CLASS) &&
           !cell.classList.contains(X_CLASS)
         ) {
-          console.log("Cell has no valid class:", clickedBoard);
           return false;
         }
       }
-      console.log("All cells have valid classes.");
       return true;
     }
 
