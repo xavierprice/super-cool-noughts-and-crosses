@@ -313,7 +313,6 @@ body {
   border-color: white;
 }
 
-/*menu icon styles*/
 .menu-toggle {
   justify-content: space-around;
   cursor: pointer;
@@ -337,7 +336,6 @@ body {
   transition: 0.4s;
 }
 
-/* Menu styles */
 .menu {
   display: flex;
   justify-content: center;
@@ -401,16 +399,11 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.9
-  ); /* Semi-transparent background for readability */
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 30px;
-  max-width: 80%; /* Set a maximum width if needed */
+  max-width: 80%;
   text-align: center;
-  z-index: 998; /* Adjust the z-index as needed */
+  z-index: 998;
 }
 
 .how-to-play.show .close-button {
@@ -420,4 +413,102 @@ body {
 
 .how-to-play {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100vw;
+    height: 100vw;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+  }
+
+  .board {
+    grid-template-columns: repeat(3, calc(33.33% - 4px));
+    grid-template-rows: repeat(3, calc(33.33% - 4px));
+  }
+
+  .cell {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+  }
+
+  .welcome-message {
+    width: 100vw;
+    height: 100vw;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+  }
+
+  /* small x styles */
+  .cell.x::before,
+  .cell.x::after {
+    width: calc(30%);
+    height: calc(90%);
+  }
+
+  /* large x styles */
+
+  .large-cell.large-x::before,
+  .large-cell.large-x::after {
+    width: calc(15%);
+    height: calc(90%);
+    background-color: black;
+  }
+
+  /* small circle styles */
+
+  .cell.circle::before {
+    width: calc(90%);
+    height: calc(90%);
+  }
+
+  .cell.circle::after {
+    width: calc(63%);
+    height: calc(63%);
+    background-color: white;
+  }
+
+  .board.disable-click .cell.circle::before,
+  .cell.circle.disable-click::before {
+    width: calc(90%);
+    height: calc(90%);
+  }
+
+  .board.disable-click .cell.circle::after,
+  .cell.circle.disable-click::after {
+    width: calc(63%);
+    height: calc(63%);
+    background-color: lightgray;
+  }
+
+  /* large circle styles */
+
+  .large-cell.large-circle::before {
+    width: calc(90%);
+    height: calc(90%);
+  }
+
+  .large-cell.large-circle::after {
+    width: calc(63%);
+    height: calc(63%);
+    background-color: white;
+  }
+
+  .board.disable-click .large-cell.large-circle::before,
+  .large-cell.large-circle.disable-click::before {
+    width: calc(90%);
+    height: calc(90%);
+  }
+
+  .board.disable-click .large-cell.large-circle::after,
+  .large-cell.large-circle.disable-click::after {
+    width: calc(63%);
+    height: calc(63%);
+    background-color: lightgrey;
+  }
 }
