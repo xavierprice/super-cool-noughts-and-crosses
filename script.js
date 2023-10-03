@@ -266,6 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
       cellsInBoard.forEach((cell) => {
         cell.classList.remove(CIRCLE_CLASS, X_CLASS);
       });
+      circleTurn = !circleTurn;
       continueGame();
     }
 

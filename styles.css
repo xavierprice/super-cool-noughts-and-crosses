@@ -455,7 +455,9 @@ body {
 
   /* small x styles */
   .cell.x::before,
-  .cell.x::after {
+  .cell.x::after,
+  .board.x .cell:not(.x):not(.circle):hover::before,
+  .board.x .cell:not(.x):not(.circle):hover::after {
     width: calc(30%);
     height: calc(90%);
   }
