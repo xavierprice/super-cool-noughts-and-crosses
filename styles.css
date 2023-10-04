@@ -273,6 +273,7 @@ body {
   background-color: rgba(0, 0, 0, 0.9);
   justify-content: center;
   align-items: center;
+  text-align: center;
   color: white;
   font-size: 5rem;
   flex-direction: column;
