@@ -12,49 +12,58 @@
     <title>Noughts and Crosses Connect</title>
   </head>
   <body>
-    <div class="menu-toggle">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-    </div>
-    <nav class="menu">
-      <button class="close-button">×</button>
-      <div class="button-container">
-        <button id="restartGame">Restart</button>
-        <button class="how-to-play-button">How to play</button>
+    <nav class="menu-container">
+      <span class="menu-toggle">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </span>
+      <div class="menu">
+        <button class="close-button">×</button>
+        <div class="button-container">
+          <button id="restartGame">Restart</button>
+          <button class="how-to-play-button">How to play</button>
+        </div>
       </div>
     </nav>
-    <div class="overlay"></div>
-    <div class="container" id="container"></div>
-    <section class="view-turn">
-      <div class="view-turn-box"></div>
-      <button id="restart-media-query">Restart</button>
-    </section>
-    <section class="how-to-play" id="howToPlaySection">
-      <button class="close-button">×</button>
-      - Win mini Noughts and Crosses games to place big tokens on the larger
-      board.
-      <br />
-      <br />
-      - Whichever small cell you click determines where the next game will be
-      played. If a board already has a large token then next player can choose
-      any cell.
-      <br />
-      <br />
-      - Connect three of your big tokens to win!
-    </section>
-    <div class="overlay"></div>
-    <div class="message-container" id="message-container">
-      <section class="welcome-message">
-        <span>Welcome!</span>
-        <button id="playButton">Play</button>
-        <button class="how-to-play-button">How to play</button>
+    <main>
+      <section class="left">
+        <div class="container" id="container"></div>
       </section>
-    </div>
-    <div class="winning-message" id="winningMessage">
-      <div data-winning-message-text></div>
-      <button id="restartButton">Restart</button>
-    </div>
+      <section class="right">
+        <section class="view-turn">
+          <div class="view-turn-box"></div>
+          <button id="restart-media-query">Restart</button>
+        </section>
+        <section class="how-to-play" id="howToPlaySection">
+          <button class="close-button">×</button>
+          - Win mini Noughts and Crosses games to place big tokens on the larger
+          board.
+          <br />
+          <br />
+          - Whichever small cell you click determines where the next game will
+          be played. If a board already has a large token then next player can
+          choose any cell.
+          <br />
+          <br />
+          - Connect three of your big tokens to win!
+        </section>
+      </section>
+      <div class="overlay"></div>
+      <section class="center">
+        <div class="message-container" id="message-container">
+          <section class="welcome-message">
+            <span>Welcome!</span>
+            <button id="playButton">Play</button>
+            <button class="how-to-play-button">How to play</button>
+          </section>
+        </div>
+        <div class="winning-message" id="winningMessage">
+          <div data-winning-message-text></div>
+          <button id="restartButton">Restart</button>
+        </div>
+      </section>
+    </main>
     <script src="generateHTML.js"></script>
     <script src="script.js"></script>
   </body>
