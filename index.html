@@ -29,12 +29,12 @@
     <main>
       <section class="left">
         <div class="container" id="container"></div>
-      </section>
-      <section class="right">
         <section class="view-turn">
           <div class="view-turn-box"></div>
           <button id="restart-media-query">Restart</button>
         </section>
+      </section>
+      <section class="right">
         <section class="how-to-play" id="howToPlaySection">
           <button class="close-button">×</button>
           - Win mini Noughts and Crosses games to place big tokens on the larger
@@ -49,21 +49,21 @@
           - Connect three of your big tokens to win!
         </section>
       </section>
-      <div class="overlay"></div>
-      <section class="center">
-        <div class="message-container" id="message-container">
-          <section class="welcome-message">
-            <span>Welcome!</span>
-            <button id="playButton">Play</button>
-            <button class="how-to-play-button">How to play</button>
-          </section>
-        </div>
-        <div class="winning-message" id="winningMessage">
-          <div data-winning-message-text></div>
-          <button id="restartButton">Restart</button>
-        </div>
-      </section>
     </main>
+    <div class="overlay"></div>
+    <section class="center">
+      <div class="message-container" id="message-container">
+        <section class="welcome-message">
+          <span>Welcome!</span>
+          <button id="playButton">Play</button>
+          <button class="how-to-play-button">How to play</button>
+        </section>
+      </div>
+      <div class="winning-message" id="winningMessage">
+        <div data-winning-message-text></div>
+        <button id="restartButton">Restart</button>
+      </div>
+    </section>
     <script src="generateHTML.js"></script>
     <script src="script.js"></script>
   </body>
