@@ -9,16 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const winningMessageElement = document.getElementById("winningMessage");
   const welcomeMessageElement = document.getElementById("message-container");
   const restartButton = document.getElementById("restartButton");
-  const restartGame = document.getElementById("restartGame");
   const restartMediaQuery = document.getElementById("restart-media-query");
   const playButton = document.getElementById("playButton");
   const winningMessageTextElement = document.querySelector(
     "[data-winning-message-text]"
   );
-  const menuToggle = document.querySelector(".menu-toggle");
-  const menu = document.querySelector(".menu");
-  const closeButton = document.querySelectorAll(".close-button");
-  const menuToggleElement = document.querySelector(".menu-toggle");
   const overlay = document.querySelector(".overlay");
   let circleTurn;
   const LARGE_CELL_WINNING_COMBINATION = [
@@ -161,35 +156,14 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", toggleHowToPlay);
   });
 
-  closeButton.forEach(function (button) {
-    button.addEventListener("click", closeFunction);
-  });
-
   function toggleHowToPlay() {
     howToplaySection.classList.add("show");
     welcomeMessageElement.classList.add("hide");
-    menu.classList.remove("open");
     overlay.classList.add("visible");
     continueGameNoSwitch();
   }
 
-  menuToggle.addEventListener("click", function () {
-    menu.classList.toggle("open");
-    menuToggleElement.classList.toggle("active");
-    howToplaySection.classList.remove("show");
-    overlay.classList.add("visible");
-  });
-
-  function closeFunction() {
-    menu.classList.remove("open");
-    menuToggleElement.classList.remove("active");
-    howToplaySection.classList.remove("show");
-    overlay.classList.remove("visible");
-  }
-
   overlay.addEventListener("click", function () {
-    menu.classList.remove("open");
-    menuToggleElement.classList.remove("active");
     howToplaySection.classList.remove("show");
     overlay.classList.remove("visible");
   });
@@ -203,19 +177,16 @@ document.addEventListener("DOMContentLoaded", function () {
   //end of function declarations
 
   restartButton.addEventListener("click", startGame);
-  restartGame.addEventListener("click", startGame);
   restartMediaQuery.addEventListener("click", startGame);
 
   playButton.addEventListener("click", startGame);
 
-  menuToggle.classList.add("active");
   howToplaySection.classList.remove("show");
 
   function startGame() {
     circleTurn = false;
     updateViewTurnBox();
-    menu.classList.remove("open");
-    menuToggleElement.classList.remove("active");
+
     howToplaySection.classList.remove("show");
     overlay.classList.remove("visible");
     boardElements.forEach((board) => {
