@@ -172,6 +172,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function updateViewTurnBox() {
     viewTurnBox.innerText = circleTurn ? "Noughts Turn" : "Crosses Turn";
+
+      if (circleTurn) {
+        viewTurnBox.classList.remove("crosses-turn");
+      } else {
+        viewTurnBox.classList.add("crosses-turn");
+      }
   }
 
   //end of function declarations

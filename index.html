@@ -7,7 +7,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
     />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Raleway:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="styles.css" />
     <title>Noughts and Crosses Connect</title>
   </head>
@@ -15,12 +20,16 @@
     <main>
       <section class="left">
         <div class="container" id="container"></div>
-        <section class="view-turn">
-          <div class="view-turn-box"></div>
-          <button id="restart-media-query">Restart</button>
-        </section>
       </section>
       <section class="right">
+        <h1>
+          Super Cool
+          <span class="noughts-and-crosses-text">
+            <span class="noughts">Noughts</span> and
+            <span class="crosses">Crosses</span>
+          </span>
+        </h1>
+
         <section class="how-to-play" id="howToPlaySection">
           <button class="close-button">×</button>
           - Win mini Noughts and Crosses games to place big tokens on the larger
@@ -33,6 +42,10 @@
           <br />
           <br />
           - Connect three of your big tokens to win!
+        </section>
+        <section class="view-turn">
+          <div class="view-turn-box"></div>
+          <button id="restart-media-query">Restart</button>
         </section>
       </section>
     </main>
