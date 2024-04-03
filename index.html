@@ -23,41 +23,34 @@
       </section>
       <section class="right">
         <h1>
-          Super Cool
-          <span class="noughts-and-crosses-text">
+          <span class="super-cool">Super Cool</span>
+          <div class="noughts-and-crosses-text">
             <span class="noughts">Noughts</span> and
             <span class="crosses">Crosses</span>
-          </span>
+          </div>
         </h1>
 
         <section class="how-to-play" id="howToPlaySection">
           <button class="close-button">×</button>
-          - Win mini Noughts and Crosses games to place big tokens on the larger
-          board.
+          <p>Win mini games to place large tokens on the board.</p>
+
           <br />
+          <p>
+            The cell clicked determines next game. If that game has a large
+            token then the next player can choose any cell.
+          </p>
           <br />
-          - Whichever small cell you click determines where the next game will
-          be played. If a board already has a large token then next player can
-          choose any cell.
+          <p>Connect three of the same big tokens to win!</p>
           <br />
-          <br />
-          - Connect three of your big tokens to win!
-        </section>
-        <section class="view-turn">
-          <div class="view-turn-box"></div>
-          <button id="restart-media-query">Restart</button>
+          <section class="view-turn">
+            <div class="view-turn-box"></div>
+            <button id="restart-media-query">Restart</button>
+          </section>
         </section>
       </section>
     </main>
     <div class="overlay"></div>
     <section class="center">
-      <div class="message-container" id="message-container">
-        <section class="welcome-message">
-          <span>Welcome!</span>
-          <button id="playButton">Play</button>
-          <button class="how-to-play-button">How to play</button>
-        </section>
-      </div>
       <div class="winning-message" id="winningMessage">
         <div data-winning-message-text></div>
         <button id="restartButton">Restart</button>

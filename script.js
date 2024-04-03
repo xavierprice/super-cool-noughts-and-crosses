@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const cellElements = document.querySelectorAll("[data-cell]");
   const boardElements = document.querySelectorAll(".board");
   const winningMessageElement = document.getElementById("winningMessage");
-  const welcomeMessageElement = document.getElementById("message-container");
   const restartButton = document.getElementById("restartButton");
   const restartMediaQuery = document.getElementById("restart-media-query");
   const playButton = document.getElementById("playButton");
@@ -119,6 +118,10 @@ document.addEventListener("DOMContentLoaded", function () {
       winningMessageTextElement.innerText = `${
         circleTurn ? "Circle" : "Cross"
       } Wins!`;
+      winningMessageElement.setAttribute(
+        "data-winning-message-text",
+        circleTurn ? "circle" : "cross"
+      );
     }
     winningMessageElement.classList.add("show");
   }
@@ -149,22 +152,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  const howToPlayButton = document.querySelectorAll(".how-to-play-button");
-  const howToplaySection = document.getElementById("howToPlaySection");
-
-  howToPlayButton.forEach(function (button) {
-    button.addEventListener("click", toggleHowToPlay);
-  });
-
-  function toggleHowToPlay() {
-    howToplaySection.classList.add("show");
-    welcomeMessageElement.classList.add("hide");
-    overlay.classList.add("visible");
-    continueGameNoSwitch();
-  }
-
+  //delete maybe
   overlay.addEventListener("click", function () {
-    howToplaySection.classList.remove("show");
     overlay.classList.remove("visible");
   });
 
@@ -173,11 +162,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateViewTurnBox() {
     viewTurnBox.innerText = circleTurn ? "Noughts Turn" : "Crosses Turn";
 
-      if (circleTurn) {
-        viewTurnBox.classList.remove("crosses-turn");
-      } else {
-        viewTurnBox.classList.add("crosses-turn");
-      }
+    if (circleTurn) {
+      viewTurnBox.classList.remove("crosses-turn");
+    } else {
+      viewTurnBox.classList.add("crosses-turn");
+    }
   }
 
   //end of function declarations
@@ -185,15 +174,10 @@ document.addEventListener("DOMContentLoaded", function () {
   restartButton.addEventListener("click", startGame);
   restartMediaQuery.addEventListener("click", startGame);
 
-  playButton.addEventListener("click", startGame);
-
-  howToplaySection.classList.remove("show");
-
   function startGame() {
     circleTurn = false;
     updateViewTurnBox();
 
-    howToplaySection.classList.remove("show");
     overlay.classList.remove("visible");
     boardElements.forEach((board) => {
       board.classList.add("allow-click");
@@ -210,7 +194,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     setBoardHoverClass();
     winningMessageElement.classList.remove("show");
-    welcomeMessageElement.classList.add("hide");
   }
 
   function handleClick(e) {
@@ -293,4 +276,5 @@ document.addEventListener("DOMContentLoaded", function () {
       updateViewTurnBox();
     }
   }
+  startGame();
 });
