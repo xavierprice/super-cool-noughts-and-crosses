@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let circleTurn;
   let prevBoard = null;
   let prevClickedCell = null;
+  let prevBoardLargeClass = null;
   const LARGE_CELL_WINNING_COMBINATION = [
     [0, 1, 2],
     [3, 4, 5],
@@ -71,6 +72,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function continueGame() {
+    boardElements.forEach((board) => {
+      if (
+        board == prevBoard &&
+        (prevBoard.classList.contains(LARGE_CIRCLE_CLASS) ||
+          prevBoard.classList.contains(LARGE_X_CLASS))
+      )
+        undoTurnEnabled = false;
+      updateButtonStyle();
+      {
+      }
+    });
     switchTurns();
     updateViewTurnBox();
     cellElements.forEach((cell) => {
@@ -176,12 +188,12 @@ document.addEventListener("DOMContentLoaded", function () {
   restartButton.addEventListener("click", startGame);
   restartMediaQuery.addEventListener("click", startGame);
 
-  let undoTurnEnabled = true;
+  let undoTurnEnabled = false;
 
   function startGame() {
     circleTurn = false;
     updateViewTurnBox();
-    undoTurnEnabled = true;
+    undoTurnEnabled = false;
     updateButtonStyle();
 
     overlay.classList.remove("visible");
@@ -202,12 +214,12 @@ document.addEventListener("DOMContentLoaded", function () {
     winningMessageElement.classList.remove("show");
   }
 
+  //fix undoTurn after first move
   function undoTurn(e) {
     if (undoTurnEnabled) {
       continueGame();
 
       const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
-      const cell = e.target;
 
       boardElements.forEach((board) => {
         board.classList.remove("allow-click", "disable-click");
@@ -319,6 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       }
+
     } else {
       switchTurns();
       setBoardHoverClass();
