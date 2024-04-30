@@ -263,6 +263,12 @@ main {
   color: black;
 }
 
+#undo-turn.grayed-out {
+  pointer-events: none;
+  background-color: gray;
+  border: 1px solid gray;
+}
+
 #restart-media-query {
   font-size: 1.5rem;
   background-color: var(--primary-color);

@@ -176,9 +176,13 @@ document.addEventListener("DOMContentLoaded", function () {
   restartButton.addEventListener("click", startGame);
   restartMediaQuery.addEventListener("click", startGame);
 
+  let undoTurnEnabled = true;
+
   function startGame() {
     circleTurn = false;
     updateViewTurnBox();
+    undoTurnEnabled = true;
+    updateButtonStyle();
 
     overlay.classList.remove("visible");
     boardElements.forEach((board) => {
@@ -197,8 +201,6 @@ document.addEventListener("DOMContentLoaded", function () {
     setBoardHoverClass();
     winningMessageElement.classList.remove("show");
   }
-
-  let undoTurnEnabled = true;
 
   function undoTurn(e) {
     if (undoTurnEnabled) {
@@ -222,11 +224,25 @@ document.addEventListener("DOMContentLoaded", function () {
         prevClickedCell.classList.remove(currentClass);
       }
       undoTurnEnabled = false;
+      updateButtonStyle();
+    }
+  }
+
+  function updateButtonStyle() {
+    if (undoTurnButton) {
+      if (undoTurnEnabled) {
+        undoTurnButton.classList.remove("grayed-out");
+        undoTurnButton.disabled = false;
+      } else {
+        undoTurnButton.classList.add("grayed-out");
+        undoTurnButton.disabled = true;
+      }
     }
   }
 
   function handleClick(e) {
     undoTurnEnabled = true;
+    updateButtonStyle();
 
     const cell = e.target;
     const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
