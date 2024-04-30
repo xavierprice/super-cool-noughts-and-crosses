@@ -9,12 +9,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const winningMessageElement = document.getElementById("winningMessage");
   const restartButton = document.getElementById("restartButton");
   const restartMediaQuery = document.getElementById("restart-media-query");
-  const playButton = document.getElementById("playButton");
+  const undoTurnButton = document.getElementById("undo-turn");
   const winningMessageTextElement = document.querySelector(
     "[data-winning-message-text]"
   );
   const overlay = document.querySelector(".overlay");
   let circleTurn;
+  let prevBoard = null;
+  let prevClickedCell = null;
   const LARGE_CELL_WINNING_COMBINATION = [
     [0, 1, 2],
     [3, 4, 5],
@@ -170,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   //end of function declarations
-
+  undoTurnButton.addEventListener("click", undoTurn);
   restartButton.addEventListener("click", startGame);
   restartMediaQuery.addEventListener("click", startGame);
 
@@ -196,7 +198,36 @@ document.addEventListener("DOMContentLoaded", function () {
     winningMessageElement.classList.remove("show");
   }
 
+  let undoTurnEnabled = true;
+
+  function undoTurn(e) {
+    if (undoTurnEnabled) {
+      continueGame();
+
+      const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+      const cell = e.target;
+
+      boardElements.forEach((board) => {
+        board.classList.remove("allow-click", "disable-click");
+      });
+
+      boardElements.forEach((board) => {
+        if (board !== prevBoard) {
+          board.classList.add("disable-click");
+          prevBoard.classList.add("allow-click");
+        }
+      });
+
+      if (prevClickedCell) {
+        prevClickedCell.classList.remove(currentClass);
+      }
+      undoTurnEnabled = false;
+    }
+  }
+
   function handleClick(e) {
+    undoTurnEnabled = true;
+
     const cell = e.target;
     const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
     const currentLargeClass = circleTurn ? LARGE_CIRCLE_CLASS : LARGE_X_CLASS;
@@ -207,6 +238,8 @@ document.addEventListener("DOMContentLoaded", function () {
       `[data-board-index="${cellIndex}"]`
     );
     const clickedBoard = cell.closest(".board");
+    prevBoard = cell.closest(".board");
+    prevClickedCell = cell;
 
     function isMinigameDraw(clickedBoard) {
       const cellsInBoard = clickedBoard.querySelectorAll(".cell");

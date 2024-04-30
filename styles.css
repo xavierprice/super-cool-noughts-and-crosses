@@ -248,6 +248,21 @@ main {
   border: 1px solid var(--background-color-crosses);
 }
 
+#undo-turn {
+  font-size: 1.5rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: 1px solid var(--primary-color);
+  padding: var(--button-padding);
+  cursor: pointer;
+  border-radius: var(--small-padding);
+  flex: 1;
+}
+
+#undo-turn:hover {
+  color: black;
+}
+
 #restart-media-query {
   font-size: 1.5rem;
   background-color: var(--primary-color);
