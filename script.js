@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let circleTurn;
   let prevBoard = null;
   let prevClickedCell = null;
-  let prevBoardLargeClass = null;
+  let numTurns = 0;
   const LARGE_CELL_WINNING_COMBINATION = [
     [0, 1, 2],
     [3, 4, 5],
@@ -191,12 +191,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let undoTurnEnabled = false;
 
   function startGame() {
+    numTurns = 0;
     circleTurn = false;
     updateViewTurnBox();
     undoTurnEnabled = false;
     updateButtonStyle();
 
-    overlay.classList.remove("visible");
     boardElements.forEach((board) => {
       board.classList.add("allow-click");
       board.classList.remove("disable-click");
@@ -214,29 +214,32 @@ document.addEventListener("DOMContentLoaded", function () {
     winningMessageElement.classList.remove("show");
   }
 
-  //fix undoTurn after first move
-  function undoTurn(e) {
+  function undoTurn() {
     if (undoTurnEnabled) {
-      continueGame();
+      if (numTurns === 1) {
+        startGame();
+      } else {
+        continueGame();
 
-      const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
+        const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS;
 
-      boardElements.forEach((board) => {
-        board.classList.remove("allow-click", "disable-click");
-      });
+        boardElements.forEach((board) => {
+          board.classList.remove("allow-click", "disable-click");
+        });
 
-      boardElements.forEach((board) => {
-        if (board !== prevBoard) {
-          board.classList.add("disable-click");
-          prevBoard.classList.add("allow-click");
+        boardElements.forEach((board) => {
+          if (board !== prevBoard) {
+            board.classList.add("disable-click");
+            prevBoard.classList.add("allow-click");
+          }
+        });
+
+        if (prevClickedCell) {
+          prevClickedCell.classList.remove(currentClass);
         }
-      });
-
-      if (prevClickedCell) {
-        prevClickedCell.classList.remove(currentClass);
+        undoTurnEnabled = false;
+        updateButtonStyle();
       }
-      undoTurnEnabled = false;
-      updateButtonStyle();
     }
   }
 
@@ -253,6 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function handleClick(e) {
+    numTurns++;
     undoTurnEnabled = true;
     updateButtonStyle();
 
@@ -331,12 +335,12 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
       }
-
     } else {
       switchTurns();
       setBoardHoverClass();
       updateViewTurnBox();
     }
   }
+
   startGame();
 });
