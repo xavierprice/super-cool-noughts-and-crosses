@@ -489,3 +489,12 @@ main {
     height: calc(var(--media-492px-large-marker-size) * 0.5);
   }
 }
+
+@media (max-width: 498px) {
+  main {
+    padding: 5rem 1rem;
+  }
+  .container {
+    grid-template-columns: repeat(3, minmax(75px, 1fr));
+  }
+}
