@@ -12,9 +12,16 @@
   --large-cell-size: 200px;
   --large-marker-size: calc(var(--large-cell-size) * 0.9);
 
-  --media-492px-cell-size: 25px;
-  --media-492px-marker-size: calc(25px * 0.9);
-  --media-492px-large-cell-size: 100px;
+  --media-768px-cell-size: 25px;
+  --media-768px-marker-size: calc(25px * 0.9);
+  --media-768px-large-cell-size: 100px;
+  --media-768px-large-marker-size: calc(
+    var(--media-768px-large-cell-size) * 0.9
+  );
+
+  --media-492px-cell-size: 12.5px;
+  --media-492px-marker-size: calc(12.5px * 0.9);
+  --media-492px-large-cell-size: 50px;
   --media-492px-large-marker-size: calc(
     var(--media-492px-large-cell-size) * 0.9
   );
@@ -116,6 +123,12 @@ main {
   position: relative;
   grid-template-columns: repeat(3, auto);
   border: var(--border-line);
+}
+
+.board.large-circle,
+.board.large-x {
+  height: calc(var(--large-marker-size) * 1.1);
+  width: auto;
 }
 
 .cell {
@@ -341,7 +354,7 @@ main {
 .board.x .cell:not(.x):not(.circle):hover::after {
   content: "";
   position: absolute;
-  width: calc(var(--marker-size) * 0.15);
+  width: calc(var(--marker-size) * 0.2);
   height: var(--marker-size);
 }
 
@@ -349,7 +362,7 @@ main {
 .large-cell.large-x::after {
   content: "";
   position: absolute;
-  width: calc(var(--large-marker-size) * 0.15);
+  width: calc(var(--large-marker-size) * 0.2);
   height: var(--large-marker-size);
   background-color: black;
 }
@@ -383,43 +396,48 @@ main {
 .cell.circle.disable-click::before,
 .board.disable-click .board.circle .cell:not(.x):not(.circle):hover::before,
 .cell.circle.disable-click .cell:not(.x):not(.circle):hover::before {
-  width: var(--marker-size);
-  height: var(--marker-size);
+  width: calc(var(--marker-size) * 0.9);
+  height: calc(var(--marker-size) * 0.9);
 }
 .cell.circle::after,
 .board.circle .cell:not(.x):not(.circle):hover::after {
-  width: calc(var(--marker-size) * 0.7);
-  height: calc(var(--marker-size) * 0.7);
+  width: calc(var(--marker-size) * 0.5);
+  height: calc(var(--marker-size) * 0.5);
   background-color: white;
 }
 .board.disable-click .cell.circle::after,
 .cell.circle.disable-click::after,
 .board.disable-click .board.circle .cell:not(.x):not(.circle):hover::after,
 .cell.circle.disable-click .cell:not(.x):not(.circle):hover::after {
-  width: calc(var(--marker-size) * 0.7);
-  height: calc(var(--marker-size) * 0.7);
+  width: calc(var(--marker-size) * 0.5);
+  height: calc(var(--marker-size) * 0.5);
   background-color: lightgrey;
 }
 
 .large-cell.large-circle::before,
 .board.disable-click .large-cell.large-circle::before,
 .large-cell.large-circle.disable-click::before {
-  width: var(--large-marker-size);
-  height: var(--large-marker-size);
+  width: calc(var(--large-marker-size) * 0.9);
+  height: calc(var(--large-marker-size) * 0.9);
 }
 .large-cell.large-circle::after {
-  width: calc(var(--large-marker-size) * 0.7);
-  height: calc(var(--large-marker-size) * 0.7);
+  width: calc(var(--large-marker-size) * 0.6);
+  height: calc(var(--large-marker-size) * 0.6);
   background-color: white;
 }
 .board.disable-click .large-cell.large-circle::after,
 .large-cell.large-circle.disable-click::after {
-  width: calc(var(--large-marker-size) * 0.7);
-  height: calc(var(--large-marker-size) * 0.7);
+  width: calc(var(--large-marker-size) * 0.6);
+  height: calc(var(--large-marker-size) * 0.6);
   background-color: lightgrey;
 }
 
 @media (max-width: 768px) {
+  .board.large-circle,
+  .board.large-x {
+    height: calc(var(--media-768px-large-marker-size) * 1.4);
+    width: auto;
+  }
   .container {
     grid-template-columns: repeat(3, minmax(100px, 1fr));
   }
@@ -442,20 +460,20 @@ main {
     align-items: initial;
   }
   .cell {
-    width: var(--media-492px-cell-size);
-    height: var(--media-492px-cell-size);
+    width: var(--media-768px-cell-size);
+    height: var(--media-768px-cell-size);
   }
   .cell.x::before,
   .cell.x::after,
   .board.x .cell:not(.x):not(.circle):hover::before,
   .board.x .cell:not(.x):not(.circle):hover::after {
-    width: calc(--media-492px-marker-size * 0.15);
-    height: var(--media-492px-marker-size);
+    width: var(--media-768px-marker-size);
+    height: calc(var(--media-768px-marker-size) - 17px);
   }
   .large-cell.large-x::before,
   .large-cell.large-x::after {
-    width: calc(--media-492px-large-marker-size * 0.15);
-    height: var(--media-492px-large-marker-size);
+    width: calc(var(--media-768px-large-marker-size) * 0.3);
+    height: var(--media-768px-large-marker-size);
   }
   .cell.circle::before,
   .board.circle .cell:not(.x):not(.circle):hover::before,
@@ -463,8 +481,8 @@ main {
   .cell.circle.disable-click::before,
   .board.disable-click .board.circle .cell:not(.x):not(.circle):hover::before,
   .cell.circle.disable-click .cell:not(.x):not(.circle):hover::before {
-    width: calc(var(--media-492px-marker-size) - 2px);
-    height: calc(var(--media-492px-marker-size) - 2px);
+    width: calc(var(--media-768px-marker-size) - 2px);
+    height: calc(var(--media-768px-marker-size) - 2px);
   }
   .cell.circle::after,
   .board.circle .cell:not(.x):not(.circle):hover::after,
@@ -472,29 +490,61 @@ main {
   .cell.circle.disable-click::after,
   .board.disable-click .board.circle .cell:not(.x):not(.circle):hover::after,
   .cell.circle.disable-click .cell:not(.x):not(.circle):hover::after {
-    width: calc(var(--media-492px-marker-size) * 0.4);
-    height: calc(var(--media-492px-marker-size) * 0.4);
+    width: calc(var(--media-768px-marker-size) * 0.4);
+    height: calc(var(--media-768px-marker-size) * 0.4);
   }
 
   .large-cell.large-circle::before,
   .board.disable-click .large-cell.large-circle::before,
   .large-cell.large-circle.disable-click::before {
-    width: var(--media-492px-large-marker-size);
-    height: var(--media-492px-large-marker-size);
+    width: var(--media-768px-large-marker-size);
+    height: var(--media-768px-large-marker-size);
   }
   .large-cell.large-circle::after,
   .board.disable-click .large-cell.large-circle::after,
   .large-cell.large-circle.disable-click::after {
-    width: calc(var(--media-492px-large-marker-size) * 0.5);
-    height: calc(var(--media-492px-large-marker-size) * 0.5);
+    width: calc(var(--media-768px-large-marker-size) * 0.5);
+    height: calc(var(--media-768px-large-marker-size) * 0.5);
   }
 }
 
 @media (max-width: 498px) {
+  .board.large-circle,
+  .board.large-x {
+    height: calc(var(--media-492px-large-marker-size) * 2.6);
+    width: auto;
+  }
   main {
     padding: 5rem 1rem;
   }
   .container {
     grid-template-columns: repeat(3, minmax(75px, 1fr));
+  }
+
+  .cell.x::before,
+  .cell.x::after,
+  .board.x .cell:not(.x):not(.circle):hover::before,
+  .board.x .cell:not(.x):not(.circle):hover::after {
+    width: calc(var(--media-492px-marker-size) + 9px);
+    height: calc(var(--media-492px-marker-size) - 5px);
+  }
+
+  .large-cell.large-x::before,
+  .large-cell.large-x::after {
+    width: calc(var(--media-492px-large-marker-size) * 0.5);
+    height: calc(var(--media-492px-large-marker-size) * 1.6);
+  }
+
+  .large-cell.large-circle::before,
+  .board.disable-click .large-cell.large-circle::before,
+  .large-cell.large-circle.disable-click::before {
+    width: calc(var(--media-492px-large-marker-size) * 1.5);
+    height: calc(var(--media-492px-large-marker-size) * 1.5);
+  }
+  .large-cell.large-circle::after,
+  .board.disable-click .large-cell.large-circle::after,
+  .large-cell.large-circle.disable-click::after {
+    width: calc(var(--media-492px-large-marker-size) * 0.7);
+    height: calc(var(--media-492px-large-marker-size) * 0.7);
   }
 }
