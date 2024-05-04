@@ -292,6 +292,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cell.classList.remove(CIRCLE_CLASS, X_CLASS);
       });
       circleTurn = !circleTurn;
+      undoTurnEnabled = false;
       continueGame();
     }
 
